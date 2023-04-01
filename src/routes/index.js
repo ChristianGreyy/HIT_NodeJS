@@ -6,7 +6,13 @@ const {
   getRegiser,
 } = require("../controllers/index.controller");
 
-const { getProduct, addProduct } = require("../controllers/product.controller");
+const {
+  getProductById,
+  getProducts,
+  addProduct,
+  deleteProduct,
+  editProduct,
+} = require("../controllers/product.controller");
 
 router.get("/", getHome);
 
@@ -14,8 +20,11 @@ router.get("/login", getLogin);
 
 router.get("/register", getRegiser);
 
-router.get("/products", getProduct);
-
-router.get("/add-product", addProduct);
+// CRUD
+router.get("/products", getProducts); // -> READ
+router.post("/add-product", addProduct); // -> CREATE
+router.get("/products/:productId", getProductById); // -> READ
+router.put("/edit-product/:productId", editProduct); // -> UPDATE
+router.delete("/delete-product/:productId", deleteProduct); // -> DELETE
 
 module.exports = router;

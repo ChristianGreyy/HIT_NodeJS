@@ -30,27 +30,20 @@
 
     <%- include('./header.ejs') %>
 
-
-        <h2>
-            <%= title %>
-        </h2>
-
-
-        <br>
-        <br>
-        <br>
-
         <table>
             <tr>
+                <th>Id</th>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Description</th>
                 <th>Image</th>
                 <th>Rating</th>
             </tr>
-
             <% for(let item of products) { %>
                 <tr>
+                    <td>
+                        <%= item.id %>
+                    </td>
                     <td>
                         <%= item.title %>
                     </td>
@@ -61,17 +54,17 @@
                         <%= item.description %>
                     </td>
                     <td>
-                        <img style="width: 50px;" src="<%= item.image %>" alt="">
+                        <img style="width: 60px" src=" <%= item.image %>" />
                     </td>
                     <td>
                         <%= item.rating.rate %>
                     </td>
                 </tr>
-
                 <% } %>
         </table>
 
         <%- include('./footer.ejs') %>
+
 
 </body>
 

@@ -1,9 +1,41 @@
-<%- include('./header.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <h1>
-        <%= title %>
-    </h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/css/add-product.css">
+</head>
 
-    <% if() {} %>
-
+<body>
+    <%- include('./header.ejs') %>
+        <form method="POST" action="/add-product" class="form_input">
+            <label for="Content">Nhập Thông Tin Sản Phâm</label>
+            <table class="form_input-products">
+                <tr>
+                    <td><label for="title">Title</label></td>
+                    <td><input type="text" name="title" id="title"></td>
+                </tr>
+                <tr>
+                    <td><label for="price">Price</label></td>
+                    <td><input type="text" name="price" id="price"></td>
+                </tr>
+                <tr>
+                    <td><label for="description">Description</label></td>
+                    <td><input type="text" name="description" id="price"></td>
+                </tr>
+                <tr>
+                    <td><label for="rating">Rating</label></td>
+                    <td><input type="text" name="rating" id="rating"></td>
+                </tr>
+            </table>
+            <button type="submit" class="button">Click Nhập</button>
+        </form>
         <%- include('./footer.ejs') %>
+
+
+</body>
+
+</html>

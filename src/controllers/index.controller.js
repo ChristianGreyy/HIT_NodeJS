@@ -1,7 +1,6 @@
 const data = require("../data/data");
 
 const getHome = (request, response) => {
-  console.log(data);
   response.json({
     msg: "success",
   });

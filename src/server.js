@@ -4,6 +4,8 @@ const app = express();
 const router = require("./routes/index");
 
 const port = 3000;
+app.use(express.urlencoded()); // form -> urlencoded url
+app.use(express.json()); // json -> json
 // set folder contain views
 app.set("views", path.join(__dirname, "views"));
 // set template engine ejs, handlebars, ...
