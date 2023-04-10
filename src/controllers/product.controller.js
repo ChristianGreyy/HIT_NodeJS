@@ -1,45 +1,74 @@
 const data = require("../data/data");
+const Product = require("../models/product.model");
 
 const getProductById = (request, response) => {
-  const product = data.find((item) => item.id == request.params.productId);
-  response.json({
-    product,
+  const products = data;
+  const product = products.find((item, index) => {
+    return item.id == request.params.productId;
   });
+  if (product) {
+    response.json({
+      product,
+    });
+  } else {
+    response.json({
+      msg: "Product not found",
+    });
+  }
 };
 const getProducts = (request, response) => {
-  let products = data;
-  if (request.query.price) {
-    products = data.filter((item) => request.query.price > +item.price);
-  }
+  const products = Product.find();
   response.json({
+    products,
+  });
+};
+const createProduct = (req, res) => {
+  const product = new Product({
+    id: "22",
+    title: "title1",
+    price: "price1",
+    description: "description1",
+    category: "category1",
+  });
+  product.save();
+
+  res.json({
+    msg: "success",
+  });
+};
+
+const deleteProductById = (req, res) => {
+  const { productId } = req.params;
+  let products = data;
+
+  products = products.filter((item) => {
+    return item.id != productId;
+  });
+
+  res.json({
     products: products,
   });
 };
-const addProduct = (req, res) => {
-  const product = req.body;
-  res.json({
-    product: product,
-  });
-};
 
-const deleteProduct = (req, res) => {
-  const product = req.body;
-  res.json({
-    product: product,
+const updateProductById = (req, res) => {
+  let products = data;
+  const { productId } = req.params;
+  const newProduct = req.body;
+  products = products.map((item) => {
+    if (item.id == productId) {
+      return newProduct;
+    }
+    return item;
   });
-};
-
-const editProduct = (req, res) => {
-  const product = req.body;
   res.json({
-    product: product,
+    newProducts: products,
   });
 };
 
 module.exports = {
   getProductById,
   getProducts,
-  addProduct,
-  deleteProduct,
-  editProduct,
+  createProduct,
+  deleteProductById,
+  updateProductById,
 };
