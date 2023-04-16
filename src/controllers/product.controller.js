@@ -1,39 +1,40 @@
-const data = require("../data/data");
 const Product = require("../models/product.model");
 
-const getProductById = (request, response) => {
-  const products = data;
-  const product = products.find((item, index) => {
-    return item.id == request.params.productId;
-  });
-  if (product) {
-    response.json({
-      product,
-    });
-  } else {
-    response.json({
-      msg: "Product not found",
-    });
+const getProductById = async (request, response) => {
+  try {
+    const { productId } = request.params;
+    const product = await Product.findOne({ _id: productId });
+    console.log(product);
+    if (product) {
+      response.json({
+        product,
+      });
+    } else {
+      response.json({
+        msg: "Product not found",
+      });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
-const getProducts = (request, response) => {
-  const products = Product.find();
+const getProducts = async (request, response) => {
+  const products = await Product.find({});
   response.json({
     products,
   });
 };
-const createProduct = (req, res) => {
+const createProduct = async (req, res) => {
   const product = new Product({
-    id: "22",
-    title: "title1",
-    price: "price1",
+    title: "title2",
+    price: 19,
     description: "description1",
     category: "category1",
   });
-  product.save();
+  await product.save();
 
   res.json({
-    msg: "success",
+    product,
   });
 };
 
